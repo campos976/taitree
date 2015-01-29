@@ -15,13 +15,17 @@ Example Output
 =======
 SandwichAI.java example:
 
+
+```
 Do you have peanut butter, jelly and bread?
 1. NO
 2. YES
 Input:
 1
 Go get the required items and start over
-///////////////////////////////again///////////////////////////
+```
+
+```
 Do you have peanut butter, jelly and bread?
 1. NO
 2. YES
@@ -42,7 +46,11 @@ Do you have a plate?
 2. NO
 Input:
 2
+
 Grab a napkin and butter your bread on the napkin with the end of your spoon.
+
+```
+
 
 =======
 Add "TaiTree.jar" to properties build libraries (not enabled)
@@ -54,5 +62,4 @@ cocoapods taitree (not enabled)
 Node JS
 =======
 npm install taitree (not enabled)
-
 
