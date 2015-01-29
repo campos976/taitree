@@ -4,19 +4,12 @@
  * and open the template in the editor.
  */
 
-package taitreenetbeansjava;
+package co.thinkstream.examples;
 
 /**
  *
  * @author test
  */
-public class TaiTreeNetBeansJava {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-       
-    }
+public class LoadAndRunJSON {
     
 }
