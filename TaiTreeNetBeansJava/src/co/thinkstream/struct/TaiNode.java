@@ -18,6 +18,7 @@ public class TaiNode {
     private String answer;
     private String desc;
     private String url;
+    private String result;
     private boolean isEndNode;
     public TaiNode(){
         id = INCREMENT_ID;
@@ -120,5 +121,19 @@ public class TaiNode {
      */
     public void setIsEndNode(boolean isEndNode) {
         this.isEndNode = isEndNode;
+    }
+
+    /**
+     * @return the result
+     */
+    public String getResult() {
+        return result;
+    }
+
+    /**
+     * @param result the result to set
+     */
+    public void setResult(String result) {
+        this.result = result;
     }
 }
