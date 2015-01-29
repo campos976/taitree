@@ -13,8 +13,36 @@ Train your AI using one of wizards provided. It will generate a JSON file. Execu
 
 Example Output
 =======
-This decision tree will teach you how to make a sandwitch.
+SandwichAI.java example:
 
+Do you have peanut butter, jelly and bread?
+1. NO
+2. YES
+Input:
+1
+Go get the required items and start over
+///////////////////////////////again///////////////////////////
+Do you have peanut butter, jelly and bread?
+1. NO
+2. YES
+Input:
+2
+Do you have a butterknife?
+1. NO
+2. YES
+Input:
+1
+Do you have spoon?
+1. NO
+2. YES
+Input:
+2
+Do you have a plate?
+1. YES
+2. NO
+Input:
+2
+Grab a napkin and butter your bread on the napkin with the end of your spoon.
 
 =======
 Add "TaiTree.jar" to properties build libraries (not enabled)
