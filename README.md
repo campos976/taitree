@@ -13,7 +13,7 @@ Train your AI using one of wizards provided. It will generate a JSON file. Execu
 
 Android Use
 =======
-Add "TaiTree.jar" to properties
+Add "TaiTree.jar" to properties build libraries (not enabled)
 
 Cocoapods Use
 =======
