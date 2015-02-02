@@ -5,10 +5,18 @@
  */
 package co.thinkstream.examples;
 
+import co.thinkstream.main.TaiLogicUnit;
 import co.thinkstream.struct.TaiNode;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jdk.internal.jfr.events.FileWriteEvent;
 
 /**
  *
@@ -34,6 +42,19 @@ public class GeneratTaitreeWizard {
         root.setQuestion(question);
         tree.add(root);
         recursiveQuestions(root,sc);
+        TaiLogicUnit logic = new TaiLogicUnit();
+        String jsonData = logic.javaObjectToJSON(tree);
+        System.out.println("");
+        System.out.println("Writing the following file: ");
+        System.out.println(jsonData);
+        try {
+            BufferedWriter out = new BufferedWriter(new FileWriter(file));
+            out.write(jsonData);
+            out.close();
+        } catch (IOException ex) {
+            Logger.getLogger(GeneratTaitreeWizard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
 
     }
 
@@ -44,12 +65,14 @@ public class GeneratTaitreeWizard {
         String solution="";
         for (int i = 0; i < children; i++) {
             TaiNode child = new TaiNode();
-            System.out.println("Whats the "+i+" possible answer?");
+            int option = i+1;
+            System.out.println("Whats the "+option+" possible answer?");
             String ans = sc.nextLine();
             System.out.println("Is this an ending solution?");
             boolean isLeaf = getBool(sc);
             child.setIsEndNode(isLeaf);
             child.setAnswer(ans);
+            child.setParentId(root.getId());
             if(isLeaf){
                 System.out.println("Enter the solution:");
                 solution = sc.nextLine();

@@ -7,7 +7,9 @@
 package taitreenetbeansjava;
 
 import co.thinkstream.examples.GeneratTaitreeWizard;
+import co.thinkstream.examples.LoadAndRunJSON;
 import co.thinkstream.examples.SandwichAI;
+import co.thinkstream.examples.TaiTreeGUI;
 
 /**
  *
@@ -25,7 +27,9 @@ public class TaiTreeNetBeansJava {
 //        System.out.println("3. Test your tree using....");
 //        System.out.println("");
 //        SandwichAI.main(args);
-       GeneratTaitreeWizard.main(args);
+//       GeneratTaitreeWizard.main(args);
+//        LoadAndRunJSON.main(args);
+        TaiTreeGUI.main(args);
     }
     
 }
