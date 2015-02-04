@@ -27,9 +27,9 @@ public class TaiTreeNetBeansJava {
 //        System.out.println("3. Test your tree using....");
 //        System.out.println("");
 //        SandwichAI.main(args);
-//       GeneratTaitreeWizard.main(args);
+       GeneratTaitreeWizard.main(args);
 //        LoadAndRunJSON.main(args);
-        TaiTreeGUI.main(args);
+//        TaiTreeGUI.main(args);
     }
     
 }

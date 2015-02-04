@@ -12,6 +12,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -23,7 +24,9 @@ import jdk.internal.jfr.events.FileWriteEvent;
  * @author test
  */
 public class GeneratTaitreeWizard {
+
     List<TaiNode> tree;
+
     public GeneratTaitreeWizard() {
 
         System.out.println("Welcome to the TaiTree Generator.");
@@ -41,7 +44,7 @@ public class GeneratTaitreeWizard {
         root.setIsEndNode(false);
         root.setQuestion(question);
         tree.add(root);
-        recursiveQuestions(root,sc);
+        recursiveQuestions(root, sc);
         TaiLogicUnit logic = new TaiLogicUnit();
         String jsonData = logic.javaObjectToJSON(tree);
         System.out.println("");
@@ -54,41 +57,49 @@ public class GeneratTaitreeWizard {
         } catch (IOException ex) {
             Logger.getLogger(GeneratTaitreeWizard.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
 
     }
 
     private void recursiveQuestions(TaiNode root, Scanner sc) {
-        System.out.println("For Question: "+root.getQuestion());
-        System.out.println("How many answers are there?");
+        System.out.println("For Question: " + root.getQuestion() + " (" + root.getAnswer() + ")");
+
+        System.out.println("How many answers are there? (" + root.getQuestion() + ")");
         int children = Integer.valueOf(sc.nextLine());
-        String solution="";
+        String solution = "";
+        List<TaiNode> qanda = new LinkedList<>();
         for (int i = 0; i < children; i++) {
             TaiNode child = new TaiNode();
-            int option = i+1;
-            System.out.println("Whats the "+option+" possible answer?");
+            String option = getOption(i);
+            System.out.println("Whats the " + option + " possible answer? (" + root.getQuestion() + ")");
             String ans = sc.nextLine();
             System.out.println("Is this an ending solution?");
             boolean isLeaf = getBool(sc);
             child.setIsEndNode(isLeaf);
             child.setAnswer(ans);
             child.setParentId(root.getId());
-            if(isLeaf){
+            if (isLeaf) {
                 System.out.println("Enter the solution:");
                 solution = sc.nextLine();
                 child.setResult(solution);
                 tree.add(child);
-            }else{
-                System.out.println("Enter next question:");
+            } else {
+                System.out.println("Enter a question for answer :(" +root.getQuestion()+":"+ child.getAnswer() + ")");
                 String question = sc.nextLine();
                 child.setQuestion(question);
                 tree.add(child);
-                recursiveQuestions(child, sc);
+
             }
-            
+            qanda.add(child);
         }
-        
-        
+        System.out.println("");
+        for (int i = 0; i < qanda.size(); i++) {
+            TaiNode n = qanda.get(i);
+            if (!n.isIsEndNode()) {
+                printBranches(n);
+                recursiveQuestions(n, sc);
+            }
+        }
+
     }
 
     public static void main(String[] args) {
@@ -97,10 +108,42 @@ public class GeneratTaitreeWizard {
 
     private boolean getBool(Scanner sc) {
         String ans = sc.nextLine();
-        if(ans.equalsIgnoreCase("yes")){
+        if (ans.equalsIgnoreCase("yes")) {
             return true;
-        }else{
+        } else {
             return false;
         }
+    }
+
+    private void printBranches(TaiNode n) {
+        TaiLogicUnit lo = new TaiLogicUnit();
+        List<TaiNode> path = lo.getPath(n, tree);
+        String space = "";
+        for (int i = 0; i < path.size(); i++) {
+            System.out.println(space + "Q:" + path.get(i).getQuestion() + ",A:" + path.get(i).getAnswer());
+            space = space + " ";
+        }
+    }
+
+    private String getOption(int i) {
+        String opt = "";
+        switch (i) {
+            case 0:
+                opt = "first";
+                break;
+            case 1:
+                opt = "second";
+                break;
+            case 2:
+                opt = "third";
+                break;
+            case 3:
+                opt = "fourth";
+                break;
+            default:
+                opt = "another";
+                break;
+        }
+        return opt;
     }
 }

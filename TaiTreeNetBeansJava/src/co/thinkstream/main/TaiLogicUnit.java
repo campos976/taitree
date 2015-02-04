@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -76,9 +77,18 @@ public class TaiLogicUnit {
 
     public List<TaiNode> getPath(TaiNode node, List<TaiNode> tree) {
         List<TaiNode> list = new ArrayList<>();
+        int runningParentId = node.getParentId();
+        for (int i = tree.size()-1; i >0; i--) {
+            TaiNode n = tree.get(i);
+            if(runningParentId == n.getId()){
+                list.add(n);
+                runningParentId = n.getParentId();
+            }
+        }       
         return list;
     }
-
+    
+    
     public void printTree(List<TaiNode> tree) {
         TaiNode root = findNode(-1, tree);
         List<TaiNode> rooNodes = getRootNodes(tree);
